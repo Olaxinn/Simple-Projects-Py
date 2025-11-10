@@ -8,10 +8,10 @@ def clear():
 def menu():
     clear()
     print("- Oyunlar -\n")
-    print("1.Taş Kağıt Makas Oyunu")
-    print("2.Zar Atma Oyunu")
-    print("3.Hikaye Oyunu")
-    print("4.Çıkış Yapınız")
+    print("1) Taş Kağıt Makas Oyunu")
+    print("2) Zar Atma Oyunu")
+    print("3) Hikaye Oyunu")
+    print("0) Çıkış Yapınız")
 
     secim = input("Seçiminizi Yapınız: ")
 
@@ -24,7 +24,7 @@ def menu():
     elif secim == "3":
         clear()
         hikaye()
-    elif secim == "4":
+    elif secim == "0":
         clear()
         print("Çıkış Yapılıyor...\n")
         clear()
@@ -55,8 +55,17 @@ def tkm():
 
     print("Taş Kağıt Makas Oyununa Hoş Geldin...")
     secenekler = ["taş","kağıt","makas"]
-    k_secim = input("Seçiminizi Yapınız: ")
+    k_secim = input("Seçiminizi Yapınız: ").lower() # kucuk hafleri al
     pc_secim = random.choice(secenekler)
+
+
+    # eğer TKM dışında bir değer girildi mi diye kontrol et.
+    while True:
+        if k_secim not in ["taş", "kağıt", "makas"]:
+            print("Lütfen taş, kağıt ve makas arasından türkçe karakter seçiminizi yapınız.")
+            tkm() # uyarıyı verdikten sonra tekrar kullanıcıdan değerleri iste.
+        else:
+            break # doğru ise döngüden çık ve sonucu açıkla
 
     clear()
     print("Sonuç Açıklanıyor! 2 Saniye Bekleyiniz")
@@ -79,64 +88,32 @@ def tkm():
     else:
         print("Bilgisayar Kazandı!")
 
-    tekrar = input("Devam Etmek İster Misiniz y/n: ")
-    if tekrar == "y":
-        clear()
-        tkm()
-    else:
-        menu_secim = input("Menüye Gitmek İster Misin y/n: ")
-        if menu_secim == "y":
-            clear()
-            menu()
-        else:
-            clear()
-            print("Çıkış Yapılıyor...\n")
-            clear()
-            print("3 Saniye İçinde Kapanacaktır")
-            time.sleep(1)
-            print("2 Saniye İçinde Kapanacaktır")
-            time.sleep(1)
-            print("1 Saniye İçinde Kapanacaktır")
-            time.sleep(1)
-            clear()
-            exit()
+    rtm("tkm")
 
 def zar():
-    clear()
+    # clear()
     zar_at = input("Zar Atmak İçin 'y' Tuşuna Basınız: ")
     
-    if zar_at == "y":
-        clear()
-        print("Zar Atılıyor! 2 Saniye Bekleyiniz")
-        time.sleep(1)
-        clear()
-        print("Zar Atılıyor! 1 Saniye Bekleyiniz")
-        time.sleep(1)
-        clear()
-
-        zar_sonuc = random.randint(1,6)
-        print(f"Zar Sonuç: {zar_sonuc}")
-        
-        tekrar = input("Devam Etmek İster Misiniz y/n: ")
-        if tekrar == "y":
-            clear()
+    while True:
+        if zar_at == "y":
+            break
+        elif zar_at != "y":
+            print("Lütfen doğru tekrar deneyiniz.")
             zar()
         else:
-            menu_secim = input("Menüye Gitmek İster Misin y/:n ")
-            if menu_secim == "y":
-                clear()
-                menu()
-            else:
-                print("Çıkış Yapılıyor...\n")
-                clear()
-                print("3 Saniye İçinde Kapanacaktır")
-                time.sleep(1)
-                print("2 Saniye İçinde Kapanacaktır")
-                time.sleep(1)
-                print("1 Saniye İçinde Kapanacaktır")
-                time.sleep(1)
-                clear()
-                exit()
+            print("error in zar function!")
+    
+    clear()
+    print("Zar Atılıyor! 2 Saniye Bekleyiniz")
+    time.sleep(1)
+    clear()
+    print("Zar Atılıyor! 1 Saniye Bekleyiniz")
+    time.sleep(1)
+    clear()
+    zar_sonuc = random.randint(1,6)
+    print(f"Zar Sonuç: {zar_sonuc}")
+
+    rtm("zar")
 
 def hikaye():
 
@@ -179,26 +156,47 @@ Fakat sonunda {user}, yanındaki rampayı fırsat bilerek hız aldı. Görkemli 
 
     print(story)    
 
-    tekrar = input("Devam Etmek İster Misiniz y/n: ")
-    if tekrar == "y":
-        clear()
-        tkm()
-    else:
-        menu_secim = input("Menüye Gitmek İster Misin y/n: ")
-        if menu_secim == "y":
-            clear()
-            menu()
-        else:
-            clear()
-            print("Çıkış Yapılıyor...\n")
-            clear()
-            print("3 Saniye İçinde Kapanacaktır")
-            time.sleep(1)
-            print("2 Saniye İçinde Kapanacaktır")
-            time.sleep(1)
-            print("1 Saniye İçinde Kapanacaktır")
-            time.sleep(1)
-            clear()
-            exit()
+    rtm("hikaye")
 
-menu()
+
+def rtm(play): # return to menu
+    while True:
+        tekrar = input("Devam Etmek İster Misiniz y/n: ").lower()
+        if tekrar not in ["y", "n"]:
+            print("Lütfen y veya n seçeneği giriniz.")
+        elif tekrar == "y":
+            clear()
+            if play == "tkm":
+                tkm()
+            elif play == "zar":
+                zar()
+            elif play == "hikaye":
+                hikaye()
+            else:
+                print("error in rtm function!")
+        else:
+            menu_secim = input("Menüye Gitmek İster Misin y/n: ")
+            if menu_secim == "y":
+                clear()
+                menu()
+            else:
+                clear()
+                print("Çıkış Yapılıyor...\n")
+                clear()
+                print("3 Saniye İçinde Kapanacaktır")
+                time.sleep(1)
+                print("2 Saniye İçinde Kapanacaktır")
+                time.sleep(1)
+                print("1 Saniye İçinde Kapanacaktır")
+                time.sleep(1)
+                clear()
+                exit()
+
+try:
+    menu()
+except KeyboardInterrupt as e:
+    print("\n\nCtrl-C terminalden çıkış yapıldı.")
+finally:
+    print("Hoçakalın.")
+
+# menu()
