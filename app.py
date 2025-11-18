@@ -11,7 +11,7 @@ def menu():
     print("1) Taş Kağıt Makas Oyunu")
     print("2) Zar Atma Oyunu")
     print("3) Hikaye Oyunu")
-    print("0) Çıkış Yapınız")
+    print("0) Çıkış Yapınız")  
 
     secim = input("Seçiminizi Yapınız: ")
 
@@ -91,29 +91,25 @@ def tkm():
     rtm("tkm")
 
 def zar():
-    # clear()
-    zar_at = input("Zar Atmak İçin 'y' Tuşuna Basınız: ")
-    
-    while True:
-        if zar_at == "y":
-            break
-        elif zar_at != "y":
-            print("Lütfen doğru tekrar deneyiniz.")
-            zar()
-        else:
-            print("error in zar function!")
-    
-    clear()
-    print("Zar Atılıyor! 2 Saniye Bekleyiniz")
-    time.sleep(1)
-    clear()
-    print("Zar Atılıyor! 1 Saniye Bekleyiniz")
-    time.sleep(1)
-    clear()
-    zar_sonuc = random.randint(1,6)
-    print(f"Zar Sonuç: {zar_sonuc}")
+    # clear() # 
+    zar_at = input("Zar Atmak İçin 'y' Tuşuna Basınız: ").lower # Lower Eklendi
 
-    rtm("zar")
+    if zar_at == "y" or "Y":
+        clear()
+        print("Zar Atılıyor! 2 Saniye Bekleyiniz")
+        time.sleep(1)
+        clear()
+        print("Zar Atılıyor! 1 Saniye Bekleyiniz")
+        time.sleep(1)
+        clear()
+        zar_sonuc = random.randint(1,6)
+        print(f"Zar Sonuç: {zar_sonuc}")
+
+        rtm("zar")
+    else:
+        print("error in zar function!")
+
+            
 
 def hikaye():
 
