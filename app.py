@@ -73,7 +73,7 @@ def tkm():
     clear()
     print("Sonuç Açıklanıyor! 1 Saniye Bekleyiniz")
     time.sleep(1)
-    clear
+    clear()
     print(f"Senin Seçimin: {k_secim}")
     print(f"Bilgisayar Seçimi: {pc_secim}")
 
@@ -92,18 +92,48 @@ def tkm():
 
 def zar():
     # clear() # 
-    zar_at = input("Zar Atmak İçin 'y' Tuşuna Basınız: ").lower # Lower Eklendi
+    while True:
+        zar_at = input("Zar Atmak İçin 'y' Tuşuna Basınız: ").lower() # Lower Eklendi, onceden () yoktu ekleyince kod calisti.
+        if zar_at not in ['y', 'Y']:
+            print("Lütfen sadece y karakterini giriniz.\n")
+            answr = input("eğer zar oynundan çıkmak isterseniz q, oynamak için y giriniz: ").lower()
+            if answr == "y":
+                # clear()
+                # print("zar oynuna 3sn içinde tekrar dönüyorsunuz")
+                # time.sleep(1)
+                # clear()
+                # print("zar oynuna 2sn içinde tekrar dönüyorsunuz")
+                # time.sleep(1)
+                # clear()
+                # print("zar oynuna tekrar dönüyorsunuz...")
+                # time.sleep(1)
+                zar_at='y'
+                zar()
+            elif answr == "q":
+                clear()
+                print("Menüye 3sn içinde tekrar dönüyorsunuz")
+                time.sleep(1)
+                clear()
+                print("Menüye 2sn içinde tekrar dönüyorsunuz")
+                time.sleep(1)
+                clear()
+                print("Menüye tekrar dönüyorsunuz...")
+                time.sleep(1)
+                menu()
+                break
+            else:
+                print("zar oyununda hata!")
 
-    if zar_at == "y" or "Y":
-        clear()
-        print("Zar Atılıyor! 2 Saniye Bekleyiniz")
-        time.sleep(1)
-        clear()
-        print("Zar Atılıyor! 1 Saniye Bekleyiniz")
-        time.sleep(1)
-        clear()
-        zar_sonuc = random.randint(1,6)
-        print(f"Zar Sonuç: {zar_sonuc}")
+        elif zar_at == "y" or zar_at == "Y":
+            clear()
+            print("Zar Atılıyor! 2 Saniye Bekleyiniz")
+            time.sleep(1)
+            clear()
+            print("Zar Atılıyor! 1 Saniye Bekleyiniz")
+            time.sleep(1)
+            clear()
+            zar_sonuc = random.randint(1,6)
+            print(f"Zar Sonuç: {zar_sonuc}")
 
         rtm("zar")
     else:
